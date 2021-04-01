@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <p>Use the Sales Crystal Ball to predict your cumstomer's demand. Life is made easy with the magic of data science! </p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            {{ div_heatmap_chart | safe }}
+        </div>
+
+        <h2>Pie Chart Selector</h2>
+        <h3><table><form action="" method="POST">
+          <td>
+          <label>Select :</label>
+            <select name="columnSelected" width="300px">
+                {% for x in options_list %}
+                <option value="{{ x }}"{% if loop.first %} SELECTED{% endif %}>{{ x }}</option>
+                {% endfor %}
+            </select>
+          </td>
+          <input type=submit value=Load>
+        </form></table></h3>
+
+        <div class="row mt-5">
+            {{ div_pie_chart | safe }}
+        </div>
+
+        <h2>Histogram selector</h2>
+        <h3><table><form action="" method="POST">
+          <td>
+          <label>Select :</label>
+            <select name="columnSelectedHist" width="300px">
+                {% for x in options_list_hist %}
+                <option value="{{ x }}"{% if loop.first %} SELECTED{% endif %}>{{ x }}</option>
+                {% endfor %}
+            </select>
+          </td>
+          <input type=submit value=LoadHist>
+        </form></table></h3>
+
+        <div class="row mt-5">
+            {{ div_hist_chart | safe }}
+        </div>
+    </div>
+    {{ script_heatmap_chart | safe }}
+    {{ script_pie_chart | safe }}
+    {{ script_hist_chart | safe }}
+{% endblock %}

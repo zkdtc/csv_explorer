@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <p>Use the Sales Crystal Ball to predict your cumstomer's demand. Life is made easy with the magic of data science! </p>
+            </div>
+        </div>
+        <form action="predict" method = "POST">
+            {% for x in features_list %}
+                <p>{{x}} <input type="text" name ={{ x }}/></p>
+            {% endfor %}
+            <p><input type = "submit" value = "submit" /></p>
+        </form>
+        
+        <div>{{show_message}}</div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+     
+    </div>
+
+
+{% endblock %}

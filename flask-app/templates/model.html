@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <p>Use the Sales Crystal Ball to predict your cumstomer's demand. Life is made easy with the magic of data science! </p>
+            </div>
+        </div>
+
+        <h2>Input Features and Target Selector</h2>
+        <h3><table><form action="" method="POST">
+          <td>
+          <label>Select Features:</label>
+          <select multiple id="mymultiselect" name="mymultiselect">         
+                {% for x in features_list %}
+                <option value="{{ x }}"{% if loop.first %} SELECTED{% endif %}>{{ x }}</option>
+                {% endfor %}
+            </select>
+          </td>
+
+          <td>
+            <label>Select Target:</label>
+            <select multiple id="targetelect" name="targetselect">         
+                  {% for x in features_list %}
+                  <option value="{{ x }}"{% if loop.first %} SELECTED{% endif %}>{{ x }}</option>
+                  {% endfor %}
+              </select>
+            </td>
+          <input type=submit value=Select>
+        </form></table></h3>
+
+        <br><br>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+     
+    </div>
+    {{ script_heatmap_chart | safe }}
+
+{% endblock %}

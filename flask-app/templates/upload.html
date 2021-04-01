@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row mt-5">
+            <h3>
+                <p>Use the Sales Crystal Ball to predict your cumstomer's demand. Life is easy with the magic of data science! </p>
+            </h3>
+        </div>
+        <h2>Upload Files</h2>
+         <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+          </form>
+        <br>
+        <br>
+        <h2>Use Files Uploaded</h2>
+        <h3><table><form action="" method="POST">
+          <td>
+          <label>Select :</label>
+            <select name="fileSelected" width="300px">
+                {% for x in file_list %}
+                <option value="{{ x }}"{% if loop.first %} SELECTED{% endif %}>{{ x }}</option>
+                {% endfor %}
+            </select>
+          </td>
+
+            <input type=submit value=Load>
+        </form></table></h3>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+{% endblock %}
